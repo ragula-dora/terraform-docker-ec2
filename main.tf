@@ -61,9 +61,6 @@ resource "aws_launch_configuration" "app" {
     sudo usermod -a -G docker ec2-user
 	sudo docker run -d -p 80:80 --name nginx nginx:latest
   EOF
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 ### Creating AutoScaling Group
@@ -71,5 +68,5 @@ resource "aws_autoscaling_group" "app" {
   launch_configuration = "${aws_launch_configuration.app.id}"
   availability_zones = ["us-east-2a"]
   min_size = 1
-  max_size = 1
+  max_size = 2
 }
