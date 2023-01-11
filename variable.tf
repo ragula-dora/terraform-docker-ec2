@@ -1,6 +1,3 @@
-variable "count" {
- default = 1
- }
 variable "region" {
  description = "AWS region for hosting our your network"
  default = "us-east-2"
