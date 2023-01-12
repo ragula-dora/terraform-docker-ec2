@@ -41,7 +41,7 @@ data "aws_ami" "amazon_linux_2" {
 resource "aws_instance" "app" {
   ami           = data.aws_ami.amazon_linux_2.id
   key_name	= "${var.key_name}"
-  instance_type = "t3.medium"
+  instance_type = "t3.nano"
   root_block_device {
     volume_size = 50
   }
@@ -57,7 +57,7 @@ resource "aws_instance" "app" {
 ### Creating Launch Configuration
 resource "aws_launch_configuration" "app" {
   image_id               = data.aws_ami.amazon_linux_2.id
-  instance_type          = "t2.medium"
+  instance_type          = "t3.nano"
   security_groups        = ["${aws_security_group.instance.id}"]
   key_name               = "${var.key_name}"
   user_data = <<-EOF
